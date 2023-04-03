@@ -545,6 +545,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.16666667
+    functionName: ActiveDamage
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.28333333
     functionName: ActiveCombo
     data: 
@@ -554,6 +561,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.41666666
     functionName: DeactiveCombo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.41666666
+    functionName: DeactivateDamage
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

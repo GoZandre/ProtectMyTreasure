@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class CharacterControler : MonoBehaviour
 {
-
+    [Header("References")]
     private Rigidbody _rigidBody;
     private Animator _animator;
 
@@ -18,6 +18,10 @@ public class CharacterControler : MonoBehaviour
     [SerializeField]
     private Transform _characterMesh;
 
+    [SerializeField]
+    private ParticleSystem _walkingParticles;
+
+    [Header("Stats")]
     [SerializeField]
     private float Speed = 1;
 
@@ -36,6 +40,8 @@ public class CharacterControler : MonoBehaviour
         _animator = _characterMesh.GetComponent<Animator>();
 
         _rigidBody = GetComponent<Rigidbody>();
+
+        _walkingParticles.enableEmission = false;
     }
 
     private void Update()
@@ -66,10 +72,12 @@ public class CharacterControler : MonoBehaviour
         {
             _characterMesh.rotation = Quaternion.Slerp(_characterMesh.rotation, Quaternion.LookRotation(velocity), 0.25f);
             _animator.SetBool("IsRunning", true);
+            _walkingParticles.enableEmission = true;
         }
         else
         {
             _animator.SetBool("IsRunning", false);
+            _walkingParticles.enableEmission = false;
         }
        
     }

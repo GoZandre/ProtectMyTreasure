@@ -9,6 +9,7 @@ public class CharacterControler : MonoBehaviour
 {
 
     private Rigidbody _rigidBody;
+    private Animator _animator;
 
     PlayerController _playerController;
 
@@ -32,6 +33,7 @@ public class CharacterControler : MonoBehaviour
         _playerController.Gameplay.Attack.performed += ctx => Attack();
 
         _camera = Camera.main;
+        _animator = _characterMesh.GetComponent<Animator>();
 
         _rigidBody = GetComponent<Rigidbody>();
     }
@@ -63,6 +65,11 @@ public class CharacterControler : MonoBehaviour
         if(velocity != Vector3.zero)
         {
             _characterMesh.rotation = Quaternion.Slerp(_characterMesh.rotation, Quaternion.LookRotation(velocity), 0.25f);
+            _animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            _animator.SetBool("IsRunning", false);
         }
        
     }

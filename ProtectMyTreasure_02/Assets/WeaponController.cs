@@ -69,4 +69,15 @@ public class WeaponController : MonoBehaviour
             _animator.SetBool("AttackCombo", true);
         }
     }
+
+
+    public void ActiveDamage()
+    {
+        GetComponent<Damager>().EnableDamage(true);
+    }
+
+    public void DeactivateDamage()
+    {
+        GetComponent<Damager>().EnableDamage(false);
+    }
 }

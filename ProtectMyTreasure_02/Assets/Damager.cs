@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class Damager : MonoBehaviour
@@ -7,6 +8,12 @@ public class Damager : MonoBehaviour
 
     [SerializeField]
     int _damageStrength = 1;
+
+    [SerializeField]
+    private string _detectionTag;
+
+    [SerializeField]
+    private bool _destroyOnDamage = false;
 
     private BoxCollider _boxCollider;
 
@@ -26,13 +33,18 @@ public class Damager : MonoBehaviour
     {
         if (collision != null)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.CompareTag(_detectionTag))
             {
                 Damageable damageable = collision.gameObject.GetComponent<Damageable>();
 
                 if (damageable != null)
                 {
                     damageable.TakeDamage(_damageStrength, transform);
+
+                    if(_destroyOnDamage)
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
         }

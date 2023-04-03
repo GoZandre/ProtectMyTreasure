@@ -20,7 +20,14 @@ public class Spawner_Manager : MonoBehaviour
     private Vector3 _spawnPoint;
 
     [SerializeField]
-    private GameObject _enemy;
+    private GameObject _enemyBasic;
+
+    [SerializeField]
+    private GameObject _enemyGunner;
+
+    private float _basicSpawnChance = 80f;
+    private float _gunnerSpawnChance = 20f;
+    private GameObject _enemyToSpawn;
 
 
     private void Update()
@@ -42,9 +49,26 @@ public class Spawner_Manager : MonoBehaviour
         _spawnPoint = _spawnPoint + direction * _distance;
     }
 
+    private void ChooseEnemyToSpawn()
+    {
+        float spawnRoll = UnityEngine.Random.Range(0, 100);
+        if(spawnRoll <= _basicSpawnChance)
+        {
+            _enemyToSpawn = _enemyBasic;
+        }
+        else
+        {
+            _enemyToSpawn = _enemyGunner;
+        }
+    }
+
+
     private void SpawnEnemies()
     {
-        Instantiate(_enemy, _spawnPoint, _enemy.transform.rotation);
+        ChooseEnemyToSpawn();
+        GameObject newEnemy = Instantiate(_enemyToSpawn, _spawnPoint, _enemyBasic.transform.rotation);
+        
+        
     }
 
 

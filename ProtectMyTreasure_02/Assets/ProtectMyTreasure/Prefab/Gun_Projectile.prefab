@@ -4939,5 +4939,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageStrength: 1
-  _detectionTag: Player
+  _detectionTag:
+  - Player
+  - Enemy
   _destroyOnDamage: 1
+  _enableDamage: 1

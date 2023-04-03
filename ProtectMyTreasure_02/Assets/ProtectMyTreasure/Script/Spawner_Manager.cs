@@ -66,9 +66,8 @@ public class Spawner_Manager : MonoBehaviour
     private void SpawnEnemies()
     {
         ChooseEnemyToSpawn();
-        GameObject newEnemy = Instantiate(_enemyToSpawn, _spawnPoint, _enemyBasic.transform.rotation);
-        
-        
+        //GameObject newEnemy = Instantiate(_enemyToSpawn, _spawnPoint, _enemyBasic.transform.rotation);
+               
     }
 
 

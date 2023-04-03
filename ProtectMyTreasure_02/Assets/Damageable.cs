@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
@@ -13,16 +14,25 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     private Animator _animator;
 
+    [SerializeField]
+    UnityEvent m_OnDeathEvent = new UnityEvent();
+
     private void Start()
     {
         _life = _maxLife;
       
     }
 
+    private void OnEnable()
+    {
+        m_OnDeathEvent.RemoveAllListeners();
+        m_OnDeathEvent.AddListener(Death);
+    }
+
 
     public void TakeDamage(int damage, Transform damageOrigin = null)
     {
-        _life -= damage;
+        _life -= damage;    
 
         if( _life <= 0)
         {
@@ -31,7 +41,7 @@ public class Damageable : MonoBehaviour
                 Vector3 damageDirection = (damageOrigin.position - transform.position);
                 
             }
-            Death();
+            m_OnDeathEvent.Invoke();
         }
 
         DamageFeedback();
@@ -40,6 +50,7 @@ public class Damageable : MonoBehaviour
 
     private void Death()
     {
+       
         GetComponent<CapsuleCollider>().enabled = false;
         _animator.SetTrigger("Death");
     }

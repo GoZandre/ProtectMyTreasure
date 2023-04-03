@@ -11,6 +11,9 @@ public class GunPirateBehavior : MonoBehaviour
 
     private float _delayBetweenShot;
 
+    [SerializeField]
+    private float _loadShootTime;
+
     private bool _canShoot = false;
 
     [Header("References")]
@@ -20,10 +23,15 @@ public class GunPirateBehavior : MonoBehaviour
     [SerializeField]
     private Transform _projectileSpawn;
 
+    [SerializeField]
+    private PreviewFireLine _previewFireLine;
+
+    private EnemyBehavior _enemyBehavior;
+
     private void Start()
     {
-        SetupDelay();
-    
+        _enemyBehavior = GetComponent<EnemyBehavior>();
+        SetupDelay();   
     }
 
     private void SetupDelay()
@@ -40,22 +48,49 @@ public class GunPirateBehavior : MonoBehaviour
         if (_canShoot)
         {
             if (_time >= _delayBetweenShot)
-            {
-                _canShoot = false;
-                Shoot();
+            {              
+                if(_time >= _delayBetweenShot + _loadShootTime)
+                {
+                    _canShoot = false;
+                    Shoot();
+                }
+                else if (_time >= _delayBetweenShot + _loadShootTime * .5f)
+                {
+
+                    _previewFireLine.AlertPreview();
+                    _enemyBehavior.SetActiveLookAt(false);
+                }
+                else
+                {
+                    PreviewShoot();
+                }
             }
-            else
-            {
-                _time += Time.deltaTime;
-            }
+
+            _time += Time.deltaTime;
         }     
+    }
+
+    private void PreviewShoot()
+    {
+        _previewFireLine.ActivePreview();
+
+        _enemyBehavior.StopNavigation();
+        _enemyBehavior.SwithcLookAtTransform(_previewFireLine.PlayerCharacter);
     }
 
     private void Shoot()
     {
+
+
         Projectile newProjectile = Instantiate(_projectilePrefab, _projectileSpawn);
         newProjectile.transform.parent = null;
 
+        _previewFireLine.OnFire();
+
+
         SetupDelay();
+
+        _enemyBehavior.StartNavigation();
+        _enemyBehavior.SetActiveLookAt(true);
     }
 }

@@ -10,6 +10,7 @@ public class PreviewFireLine : MonoBehaviour
     [SerializeField]
     private Transform _playerCharacter;
 
+    public Transform PlayerCharacter => _playerCharacter;
 
     [Header("References")]
     [SerializeField]
@@ -17,7 +18,6 @@ public class PreviewFireLine : MonoBehaviour
     [SerializeField]
     private Gradient _fireColor;
 
-    [SerializeField]
     private float _timeToWaitBeforeShoot;
 
     [SerializeField]
@@ -27,22 +27,40 @@ public class PreviewFireLine : MonoBehaviour
 
     private bool _showPreview;
 
+    private bool canAim;
+
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
-        _showPreview = true;
+        _lineRenderer.enabled = false;
+        _showPreview = false;
     }
 
-    public void OnStartFire()
+    public void ActivePreview()
     {
-        _timerDelay = 0;
+
+        _lineRenderer.enabled = true;
+        _lineRenderer.colorGradient = _baseColor;
         _showPreview = true;
+
+        canAim = true;
+    }
+
+    public void AlertPreview()
+    {
+        _lineRenderer.colorGradient = _fireColor;
+
+        canAim = false;
     }
 
     public void OnFire()
     {
 
+        _lineRenderer.enabled = false;
+        _showPreview = false;
     }
+
+    
 
     void Update()
     {
@@ -51,26 +69,18 @@ public class PreviewFireLine : MonoBehaviour
 
             Vector3 lineDirection = (_playerCharacter.position - transform.position).normalized;
 
-            if(_timerDelay >= _timeToWaitBeforeShoot)
-            {
-                OnFire();
-            }
-            else if(_timerDelay >= _timeToWaitBeforeShoot * .75f)
-            {
-                _lineRenderer.colorGradient = _fireColor;
-            }
-            else
+            if(canAim)
             {
                 _lineRenderer.SetPosition(0, transform.position + new Vector3(0, 1, 0));
 
                 _lineRenderer.SetPosition(1, transform.position + (lineDirection * _lineDistance) + new Vector3(0, 1, 0));
 
-                _lineRenderer.colorGradient = _baseColor;
+                
 
             }
-            
-            
-
+           
         }
     }
+
+
 }

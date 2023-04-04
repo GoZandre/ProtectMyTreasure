@@ -4040,13 +4040,14 @@ MonoBehaviour:
   _distance: 30
   _treasure: {fileID: 809825655}
   _centerPoint: {fileID: 809825659}
-  _spawnPoint: {x: 0, y: 0, z: 0}
   _enemyBasic: {fileID: 3448043625655419870, guid: 6747f8e2af19c37468d7f44a0ed138eb,
     type: 3}
   _enemyGunner: {fileID: 3405816761162068464, guid: 7d4e6f15b7cea874bb73491e05a4226f,
     type: 3}
   _spawnDelay: 1
   _spawnModifier: 1
+  _player: {fileID: 1545354992}
+  _waveDelay: 5
 --- !u!1001 &813981817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7223,9 +7224,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 809825662}
+        m_TargetAssemblyTypeName: Spawner_Manager, Assembly-CSharp
+        m_MethodName: EndGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1545354993}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _delayBeforeDestroy: 6
   _hitParticles: {fileID: 3052350979163315947, guid: 6fd90c1e6189943418bca6dd0fea2556,
     type: 3}

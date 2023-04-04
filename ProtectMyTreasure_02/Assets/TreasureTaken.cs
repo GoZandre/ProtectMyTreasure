@@ -31,5 +31,8 @@ public class TreasureTaken : MonoBehaviour
         _diamond.SetBasePosition(_diamondTakePos.position);
 
         enemyBehavior.IsWinning();
+
+
+        GetComponent<Spawner_Manager>().EndGame();
     }
 }

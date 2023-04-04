@@ -48,6 +48,11 @@ public class CharacterControler : MonoBehaviour
     {
     }
 
+    private void OnDisable()
+    {
+        _rigidBody.velocity = Vector3.zero;
+    }
+
     private void Attack()
     {
         Debug.Log("Attack");

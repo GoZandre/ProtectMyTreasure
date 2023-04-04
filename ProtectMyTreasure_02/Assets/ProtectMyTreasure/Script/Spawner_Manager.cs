@@ -36,7 +36,7 @@ public class Spawner_Manager : MonoBehaviour
     private Transform _player = null;
 
     [SerializeField]
-    private float _waveDelay = 15f;
+    private float _waveDelay = 5f;
 
     private float _time = 0f;
     private float _spawntime = 0f;
@@ -48,30 +48,56 @@ public class Spawner_Manager : MonoBehaviour
     
     private List<EnemyBehavior> _enemiesList = new List<EnemyBehavior>();
 
+    private bool _canSpawn;
+
+    private void Start()
+    {
+        _canSpawn = false;
+    }
+
+    public void StartGame()
+    {
+        _canSpawn = true;
+    }
+
+    public void EndGame()
+    {
+        _canSpawn = false;
+
+        foreach(EnemyBehavior enemy in _enemiesList)
+        {
+            if(enemy != null)
+            {
+                enemy.IsWinning();
+            }
+            
+        }
+    }
 
     private void Update()
     {
-
-        _time += Time.deltaTime;
-        if (_time >= _waveDelay)
+        if (_canSpawn)
         {
-            _spawnDelay = _spawnDelay * _spawnModifier;
-            _time = 0f;
-            _waveNumber++;
-            Debug.Log(_waveNumber);
+            _time += Time.deltaTime;
+            if (_time >= _waveDelay)
+            {
+                _spawnDelay = _spawnDelay * _spawnModifier;
+                _time = 0f;
+                _waveNumber++;
+                Debug.Log(_waveNumber);
 
+            }
+
+            _spawntime += Time.deltaTime;
+
+            if (_spawntime >= _spawnDelay)
+            {
+                SetSpawnPoint();
+                SpawnEnemies();
+                _spawntime = 0f;
+            }
         }
-
-        _spawntime += Time.deltaTime;
-        
-        if (_spawntime >= _spawnDelay)
-        {
-            _spawntime = 0f;
-            SetSpawnPoint();
-            SpawnEnemies();
-        }
-
-        
+             
         
     }
 
@@ -112,7 +138,7 @@ public class Spawner_Manager : MonoBehaviour
         if (gunPirateConfirmation != null)
         {
             PreviewFireLine previewFireLine = gunPirateConfirmation.PreviewFireLine;
-            previewFireLine.SetPlayerCharacter(_player.transform); 
+            previewFireLine.SetPlayerCharacter(_player); 
         }
         _enemiesList.Add(newEnemy);
 

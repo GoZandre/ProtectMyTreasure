@@ -112,6 +112,11 @@ public class EnemyBehavior : MonoBehaviour
     {
         _agent.enabled=false;
         _characterMesh.GetComponent<Animator>().SetTrigger("GetDiamond");
+
+        if(GetComponent<GunPirateBehavior>() != null)
+        {
+            GetComponent<GunPirateBehavior>().StopGun();
+        }
     }
 
 }

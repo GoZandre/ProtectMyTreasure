@@ -10,6 +10,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private CharacterControler _playerController;
 
+    [SerializeField]
+    Spawner_Manager _spawnerManager;
+
+    [SerializeField]
+    private InGameUIManager _gameUIManager;
+
     private void Start()
     {
         _menuAnimator = GetComponent<Animator>();
@@ -20,6 +26,8 @@ public class MenuManager : MonoBehaviour
     {
         _menuAnimator.SetTrigger("PlayGame");
         _playerController.gameObject.SetActive(true);
+        _gameUIManager.gameObject.SetActive(true);
+        _spawnerManager.StartGame();
     }
 
     public void QuitGame()

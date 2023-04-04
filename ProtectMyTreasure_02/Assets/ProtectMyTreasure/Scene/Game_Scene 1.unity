@@ -4047,7 +4047,8 @@ MonoBehaviour:
   _spawnDelay: 1
   _spawnModifier: 1
   _player: {fileID: 1545354992}
-  _waveDelay: 5
+  _waveDelay: 15
+  _inGameUIManager: {fileID: 936303271}
 --- !u!1001 &813981817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4683,7 +4684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &936303267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4786,6 +4787,8 @@ MonoBehaviour:
   - {fileID: 1449859059}
   - {fileID: 669305636}
   - {fileID: 2087444362}
+  spawner_Manager: {fileID: 809825662}
+  _textScore: {fileID: 572029839}
 --- !u!95 &936303272
 Animator:
   serializedVersion: 4

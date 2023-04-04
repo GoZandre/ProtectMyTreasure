@@ -26,6 +26,9 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField]
     private bool activeLookAt;
 
+    [SerializeField]
+    private int _score = 10;
+
     public void SetActiveLookAt(bool isActive)
     {
         activeLookAt = isActive;
@@ -65,6 +68,12 @@ public class EnemyBehavior : MonoBehaviour
         }
         
 
+    }
+
+    public void AddScore()
+    {
+       Spawner_Manager spawnerManager = _treasure.GetComponent<Spawner_Manager>();
+        spawnerManager.SetTotalScore(_score);
     }
 
     public void SwithcLookAtTransform(Transform _newTransform)
@@ -108,6 +117,7 @@ public class EnemyBehavior : MonoBehaviour
         _agent.enabled = false;
     }
 
+
     public void IsWinning()
     {
         _agent.enabled=false;
@@ -118,5 +128,8 @@ public class EnemyBehavior : MonoBehaviour
             GetComponent<GunPirateBehavior>().StopGun();
         }
     }
+
+
+
 
 }

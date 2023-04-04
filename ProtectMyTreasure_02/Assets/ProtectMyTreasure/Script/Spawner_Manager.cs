@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class Spawner_Manager : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class Spawner_Manager : MonoBehaviour
     private Transform _centerPoint;
 
     private float _angle = 0f;
-
     
     private Vector3 _spawnPoint;
 
@@ -36,19 +36,39 @@ public class Spawner_Manager : MonoBehaviour
     private Transform _player = null;
 
     [SerializeField]
-    private float _waveDelay = 5f;
+    private float _waveDelay = 15f;
 
     private float _time = 0f;
     private float _spawntime = 0f;
-    private float _basicSpawnChance = 0f;
+    private float _basicSpawnChance = 70f;
     private EnemyBehavior _enemyToSpawn;
 
     private int _waveNumber = 0;
 
-    
     private List<EnemyBehavior> _enemiesList = new List<EnemyBehavior>();
 
     private bool _canSpawn;
+
+    private int _totalScore = 0;
+
+    [SerializeField]
+    private InGameUIManager _inGameUIManager = null;
+
+    public int TotalScore => _totalScore;
+
+    private float _multiplier = 0.2f;
+
+    public void SetTotalScore(int receivedScore)
+    {
+        receivedScore = (int)(receivedScore * (1+(_multiplier*_waveNumber)));
+
+        _totalScore += receivedScore;
+        _multiplier += 0.05f;
+
+        _inGameUIManager.SetScore(_totalScore);
+    }
+
+    
 
     private void Start()
     {
@@ -84,7 +104,7 @@ public class Spawner_Manager : MonoBehaviour
                 _spawnDelay = _spawnDelay * _spawnModifier;
                 _time = 0f;
                 _waveNumber++;
-                Debug.Log(_waveNumber);
+                
 
             }
 

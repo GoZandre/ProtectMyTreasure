@@ -60,9 +60,9 @@ public class Damageable : MonoBehaviour
 
     private void Death()
     {
-       
         GetComponent<CapsuleCollider>().enabled = false;
         _animator.SetTrigger("Death");
+        GetComponent<EnemyBehavior>().AddScore();
     }
     
     private void DamageFeedback()

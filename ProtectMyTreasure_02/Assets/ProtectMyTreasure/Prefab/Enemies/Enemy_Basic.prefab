@@ -261,6 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2905754239896080858}
   - component: {fileID: 3448043626497088187}
+  - component: {fileID: 5940464629677089432}
   m_Layer: 0
   m_Name: Character_Pirate
   m_TagString: Untagged
@@ -315,6 +316,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5940464629677089432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2528912724489341792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65170475eea6a81489f10f17e91af82b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 4703067682283103182, guid: 35cc2833174c9954187b52dd6fb4091b,
+    type: 3}
 --- !u!1 &2618151472435037269
 GameObject:
   m_ObjectHideFlags: 0

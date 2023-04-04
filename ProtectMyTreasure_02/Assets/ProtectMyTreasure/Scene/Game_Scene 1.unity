@@ -359,11 +359,12 @@ MonoBehaviour:
   _distance: 10
   _treasure: {fileID: 809825655}
   _centerPoint: {fileID: 48808573}
-  _spawnPoint: {x: 0, y: 0, z: 0}
   _enemyBasic: {fileID: 0}
   _enemyGunner: {fileID: 0}
   _spawnDelay: 1
   _spawnModifier: 0.9
+  _player: {fileID: 0}
+  _waveDelay: 5
 --- !u!65 &48808572
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3898,13 +3899,14 @@ MonoBehaviour:
   _distance: 40
   _treasure: {fileID: 809825655}
   _centerPoint: {fileID: 809825659}
-  _spawnPoint: {x: 0, y: 0, z: 0}
   _enemyBasic: {fileID: 3448043625655419870, guid: 6747f8e2af19c37468d7f44a0ed138eb,
     type: 3}
   _enemyGunner: {fileID: 3405816761162068464, guid: 7d4e6f15b7cea874bb73491e05a4226f,
     type: 3}
   _spawnDelay: 1
   _spawnModifier: 0.9
+  _player: {fileID: 1545354992}
+  _waveDelay: 15
 --- !u!1001 &813981817
 PrefabInstance:
   m_ObjectHideFlags: 0

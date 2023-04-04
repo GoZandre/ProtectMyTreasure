@@ -36,7 +36,7 @@ public class Spawner_Manager : MonoBehaviour
     private Transform _player = null;
 
     [SerializeField]
-    private float _waveDelay = 5f;
+    private float _waveDelay = 15f;
 
     private float _time = 0f;
     private float _spawntime = 0f;
@@ -66,9 +66,9 @@ public class Spawner_Manager : MonoBehaviour
         
         if (_spawntime >= _spawnDelay)
         {
+            _spawntime = 0f;
             SetSpawnPoint();
             SpawnEnemies();
-            _spawntime = 0f;
         }
 
         
@@ -112,7 +112,7 @@ public class Spawner_Manager : MonoBehaviour
         if (gunPirateConfirmation != null)
         {
             PreviewFireLine previewFireLine = gunPirateConfirmation.PreviewFireLine;
-            previewFireLine.SetPlayerCharacter(this.transform); 
+            previewFireLine.SetPlayerCharacter(_player.transform); 
         }
         _enemiesList.Add(newEnemy);
 

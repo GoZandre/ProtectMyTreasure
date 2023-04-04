@@ -90,4 +90,10 @@ public class EnemyBehavior : MonoBehaviour
         _agent.enabled = false;
     }
 
+    public void IsWinning()
+    {
+        _agent.enabled=false;
+        _characterMesh.GetComponent<Animator>().SetTrigger("GetDiamond");
+    }
+
 }

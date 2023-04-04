@@ -32,7 +32,9 @@ public class Damageable : MonoBehaviour
 
     public void TakeDamage(int damage, Transform damageOrigin = null)
     {
-        _life -= damage;    
+        _life -= damage;
+
+        InstanceHitParticle(damageOrigin);
 
         if( _life <= 0)
         {
@@ -60,6 +62,10 @@ public class Damageable : MonoBehaviour
 
     }
 
+
+    
+
+
     [SerializeField]
     float _delayBeforeDestroy;
     float _delayValue = 0f;
@@ -75,5 +81,18 @@ public class Damageable : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    [Header("Particles")]
+
+    [SerializeField]
+    private ParticleSystem _hitParticles;
+
+    public void InstanceHitParticle(Transform damageOrigin)
+    {
+
+        ParticleSystem newParticles = Instantiate(_hitParticles, this.transform);
+
+        newParticles.transform.rotation = Quaternion.LookRotation(damageOrigin.position - transform.position);
     }
 }

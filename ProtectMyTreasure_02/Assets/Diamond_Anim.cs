@@ -25,6 +25,11 @@ public class Diamond_Anim : MonoBehaviour
         _basePosition = transform.position;
     }
 
+    public void SetBasePosition(Vector3 basePosition)
+    {
+        _basePosition = basePosition;
+    }
+
     private void Update()
     {
         if(_time >= _heightLoopDuration)

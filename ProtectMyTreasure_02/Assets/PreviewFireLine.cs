@@ -53,7 +53,7 @@ public class PreviewFireLine : MonoBehaviour
         canAim = false;
     }
 
-    public void OnFire()
+    public void DisablePreview()
     {
 
         _lineRenderer.enabled = false;

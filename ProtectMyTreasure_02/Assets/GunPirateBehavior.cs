@@ -85,12 +85,20 @@ public class GunPirateBehavior : MonoBehaviour
         Projectile newProjectile = Instantiate(_projectilePrefab, _projectileSpawn);
         newProjectile.transform.parent = null;
 
-        _previewFireLine.OnFire();
+        _previewFireLine.DisablePreview();
 
 
         SetupDelay();
 
         _enemyBehavior.StartNavigation();
         _enemyBehavior.SetActiveLookAt(true);
+    }
+
+    public void StopGun()
+    {
+        _canShoot = false;
+        _previewFireLine.DisablePreview();
+
+
     }
 }

@@ -10,7 +10,7 @@ public class PreviewFireLine : MonoBehaviour
     [SerializeField]
     private Transform _playerCharacter;
 
-    public Transform PlayerCharacter => _playerCharacter;
+    
 
     [Header("References")]
     [SerializeField]
@@ -29,6 +29,7 @@ public class PreviewFireLine : MonoBehaviour
 
     private bool canAim;
 
+
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
@@ -36,6 +37,18 @@ public class PreviewFireLine : MonoBehaviour
         _showPreview = false;
     }
 
+
+    public void SetPlayerCharacter(Transform playerCharacter)
+    {
+        _playerCharacter = playerCharacter;
+        
+    }
+
+    public Transform GetPlayerCharacter()
+    {
+        
+        return _playerCharacter; 
+    }
     public void ActivePreview()
     {
 

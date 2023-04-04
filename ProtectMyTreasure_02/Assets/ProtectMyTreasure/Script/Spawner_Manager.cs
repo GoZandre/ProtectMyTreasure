@@ -17,7 +17,7 @@ public class Spawner_Manager : MonoBehaviour
 
     private float _angle = 0f;
 
-    [SerializeField]
+    
     private Vector3 _spawnPoint;
 
     [SerializeField]
@@ -32,12 +32,16 @@ public class Spawner_Manager : MonoBehaviour
     [SerializeField]
     private float _spawnModifier = 0.9f;
 
-    private EnemyBehavior _enemyToSpawn;
+    [SerializeField]
+    private Transform _player = null;
 
+    [SerializeField]
     private float _waveDelay = 5f;
+
     private float _time = 0f;
     private float _spawntime = 0f;
-    private float _basicSpawnChance = 80f;
+    private float _basicSpawnChance = 0f;
+    private EnemyBehavior _enemyToSpawn;
 
     private int _waveNumber = 0;
 
@@ -87,7 +91,7 @@ public class Spawner_Manager : MonoBehaviour
     private void ChooseEnemyToSpawn()
     {
         float spawnRoll = UnityEngine.Random.Range(0, 100);
-        if(spawnRoll <= _basicSpawnChance)
+        if(spawnRoll < _basicSpawnChance)
         {
             _enemyToSpawn = _enemyBasic;
         }
@@ -103,9 +107,16 @@ public class Spawner_Manager : MonoBehaviour
         ChooseEnemyToSpawn();
         EnemyBehavior newEnemy = Instantiate(_enemyToSpawn, _spawnPoint, _enemyBasic.transform.rotation);
         newEnemy.StartNavigation(this.gameObject.transform);
+
+        GunPirateBehavior gunPirateConfirmation = newEnemy.GetComponent<GunPirateBehavior>();
+        if (gunPirateConfirmation != null)
+        {
+            PreviewFireLine previewFireLine = gunPirateConfirmation.PreviewFireLine;
+            previewFireLine.SetPlayerCharacter(this.transform); 
+        }
         _enemiesList.Add(newEnemy);
 
-        
+
     }
 
 

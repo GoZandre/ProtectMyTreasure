@@ -26,6 +26,8 @@ public class GunPirateBehavior : MonoBehaviour
     [SerializeField]
     private PreviewFireLine _previewFireLine;
 
+    public PreviewFireLine PreviewFireLine => _previewFireLine;
+
     private EnemyBehavior _enemyBehavior;
 
     private void Start()
@@ -75,7 +77,7 @@ public class GunPirateBehavior : MonoBehaviour
         _previewFireLine.ActivePreview();
 
         _enemyBehavior.StopNavigation();
-        _enemyBehavior.SwithcLookAtTransform(_previewFireLine.PlayerCharacter);
+        _enemyBehavior.SwithcLookAtTransform(_previewFireLine.GetPlayerCharacter());
     }
 
     private void Shoot()

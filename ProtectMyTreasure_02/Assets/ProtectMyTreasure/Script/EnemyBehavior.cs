@@ -10,7 +10,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void OnEnable()
     {
-        _treasure = null;
+        
     }
 
 }

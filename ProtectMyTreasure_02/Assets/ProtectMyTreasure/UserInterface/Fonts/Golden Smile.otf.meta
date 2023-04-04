@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: cd0fe0a7bb3fa304f833ef371f2ea27f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Golden Smile
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 249abd3dbce859045a0659a318769984, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

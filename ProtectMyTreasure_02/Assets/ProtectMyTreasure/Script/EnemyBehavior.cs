@@ -42,6 +42,14 @@ public class EnemyBehavior : MonoBehaviour
             Debug.LogError("No agent fing on " + gameObject);
         }
 
+        NavMeshHit hit;
+
+        if (NavMesh.SamplePosition(this.transform.position, out hit, 10f, 0) == true)
+        {
+            this.transform.position = hit.position;
+        }
+
+
         SetActiveLookAt(false);
 
         //Auto start

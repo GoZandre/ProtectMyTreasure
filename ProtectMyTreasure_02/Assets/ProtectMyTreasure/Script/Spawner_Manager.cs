@@ -44,30 +44,56 @@ public class Spawner_Manager : MonoBehaviour
     
     private List<EnemyBehavior> _enemiesList = new List<EnemyBehavior>();
 
+    private bool _canSpawn;
+
+    private void Start()
+    {
+        _canSpawn = false;
+    }
+
+    public void StartGame()
+    {
+        _canSpawn = true;
+    }
+
+    public void EndGame()
+    {
+        _canSpawn = false;
+
+        foreach(EnemyBehavior enemy in _enemiesList)
+        {
+            if(enemy != null)
+            {
+                enemy.IsWinning();
+            }
+            
+        }
+    }
 
     private void Update()
     {
-
-        _time += Time.deltaTime;
-        if (_time >= _waveDelay)
+        if (_canSpawn)
         {
-            _spawnDelay = _spawnDelay * _spawnModifier;
-            _time = 0f;
-            _waveNumber++;
-            Debug.Log(_waveNumber);
+            _time += Time.deltaTime;
+            if (_time >= _waveDelay)
+            {
+                _spawnDelay = _spawnDelay * _spawnModifier;
+                _time = 0f;
+                _waveNumber++;
+                Debug.Log(_waveNumber);
 
+            }
+
+            _spawntime += Time.deltaTime;
+
+            if (_spawntime >= _spawnDelay)
+            {
+                SetSpawnPoint();
+                SpawnEnemies();
+                _spawntime = 0f;
+            }
         }
-
-        _spawntime += Time.deltaTime;
-        
-        if (_spawntime >= _spawnDelay)
-        {
-            SetSpawnPoint();
-            SpawnEnemies();
-            _spawntime = 0f;
-        }
-
-        
+             
         
     }
 

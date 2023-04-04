@@ -15,7 +15,12 @@ public class Damageable : MonoBehaviour
     private Animator _animator;
 
     [SerializeField]
+    UnityEvent m_OnHitEvent = new UnityEvent();
+
+    [SerializeField]
     UnityEvent m_OnDeathEvent = new UnityEvent();
+
+
 
     private void Start()
     {
@@ -27,6 +32,9 @@ public class Damageable : MonoBehaviour
     {
         m_OnDeathEvent.RemoveAllListeners();
         m_OnDeathEvent.AddListener(Death);
+
+        m_OnHitEvent.RemoveAllListeners();
+        m_OnHitEvent.AddListener(DamageFeedback);
     }
 
 
@@ -46,7 +54,7 @@ public class Damageable : MonoBehaviour
             m_OnDeathEvent.Invoke();
         }
 
-        DamageFeedback();
+        m_OnHitEvent.Invoke();
     }
 
 

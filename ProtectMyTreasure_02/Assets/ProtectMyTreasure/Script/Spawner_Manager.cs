@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Spawner_Manager : MonoBehaviour
 {
     [SerializeField]
-    private float _distance = 1000f;
+    private float _distance = 40f;
 
     [SerializeField]
     private GameObject _treasure;
@@ -20,20 +21,54 @@ public class Spawner_Manager : MonoBehaviour
     private Vector3 _spawnPoint;
 
     [SerializeField]
-    private GameObject _enemyBasic;
+    private EnemyBehavior _enemyBasic;
 
     [SerializeField]
-    private GameObject _enemyGunner;
+    private EnemyBehavior _enemyGunner;
 
+    [SerializeField]
+    private float _spawnDelay = 1f;
+
+    [SerializeField]
+    private float _spawnModifier = 0.9f;
+
+    private EnemyBehavior _enemyToSpawn;
+
+    private float _waveDelay = 5f;
+    private float _time = 0f;
+    private float _spawntime = 0f;
     private float _basicSpawnChance = 80f;
-    private float _gunnerSpawnChance = 20f;
-    private GameObject _enemyToSpawn;
+
+    private int _waveNumber = 0;
+
+    
+    private List<EnemyBehavior> _enemiesList = new List<EnemyBehavior>();
 
 
     private void Update()
     {
-        SetSpawnPoint();
-        SpawnEnemies();
+
+        _time += Time.deltaTime;
+        if (_time >= _waveDelay)
+        {
+            _spawnDelay = _spawnDelay * _spawnModifier;
+            _time = 0f;
+            _waveNumber++;
+            Debug.Log(_waveNumber);
+
+        }
+
+        _spawntime += Time.deltaTime;
+        
+        if (_spawntime >= _spawnDelay)
+        {
+            SetSpawnPoint();
+            SpawnEnemies();
+            _spawntime = 0f;
+        }
+
+        
+        
     }
 
 
@@ -66,8 +101,11 @@ public class Spawner_Manager : MonoBehaviour
     private void SpawnEnemies()
     {
         ChooseEnemyToSpawn();
-        //GameObject newEnemy = Instantiate(_enemyToSpawn, _spawnPoint, _enemyBasic.transform.rotation);
-               
+        EnemyBehavior newEnemy = Instantiate(_enemyToSpawn, _spawnPoint, _enemyBasic.transform.rotation);
+        newEnemy.StartNavigation(this.gameObject.transform);
+        _enemiesList.Add(newEnemy);
+
+        
     }
 
 

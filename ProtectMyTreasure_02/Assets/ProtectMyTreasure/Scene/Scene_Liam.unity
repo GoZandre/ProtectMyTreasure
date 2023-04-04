@@ -139,7 +139,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7e31b9eb3a7728243a366076d26c2982,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7e31b9eb3a7728243a366076d26c2982,
         type: 3}
@@ -587,9 +587,9 @@ MonoBehaviour:
   _treasure: {fileID: 1323628210}
   _centerPoint: {fileID: 1323628214}
   _spawnPoint: {x: 0, y: 0, z: 0}
-  _enemyBasic: {fileID: 919132149155446097, guid: 7e31b9eb3a7728243a366076d26c2982,
+  _enemyBasic: {fileID: 3448043625655419870, guid: 6747f8e2af19c37468d7f44a0ed138eb,
     type: 3}
-  _enemyGunner: {fileID: 919132149155446097, guid: adee3a075a34132459831ffde5cd8aa3,
+  _enemyGunner: {fileID: 3405816761162068464, guid: 7d4e6f15b7cea874bb73491e05a4226f,
     type: 3}
 --- !u!1 &1357142768
 GameObject:

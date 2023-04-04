@@ -1355,7 +1355,7 @@ MonoBehaviour:
   _treasure: {fileID: 0}
   _characterMesh: {fileID: 8610778588649106609}
   _speed: 2
-  _autoStart: 1
+  _autoStart: 0
   _lookAtTransform: {fileID: 0}
   activeLookAt: 1
 --- !u!1 &3405816761211397515

@@ -42,14 +42,26 @@ public class EnemyBehavior : MonoBehaviour
             Debug.LogError("No agent fing on " + gameObject);
         }
 
+        NavMeshHit hit;
+
+        if (NavMesh.SamplePosition(this.transform.position, out hit, 10f, 0) == true)
+        {
+            this.transform.position = hit.position;
+        }
+
+
+        SetActiveLookAt(false);
+
         //Auto start
-        if(_autoStart )
+        if (_autoStart )
         {
             StartNavigation();
+            
         }
         else
         {
             StopNavigation();
+            
         }
         
 
@@ -74,15 +86,21 @@ public class EnemyBehavior : MonoBehaviour
 
     }
 
-    public void StartNavigation()
+    public void StartNavigation(Transform newTreasure = null)
     {
-        
+        if(newTreasure != null)
+        {
+            _treasure = newTreasure;
+        }
+
         _agent.enabled = true;
 
         _agent.SetDestination(_treasure.position);
         _agent.speed = _speed;
 
         _lookAtTransform = _treasure.transform;
+
+        SetActiveLookAt(true);
     }
 
     public void StopNavigation()
